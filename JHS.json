@@ -1,0 +1,1789 @@
+{
+	"info": {
+		"_postman_id": "e4e8b58e-ea37-4133-83e9-141715de32b7",
+		"name": "JHS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6413961"
+	},
+	"item": [
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Get token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var TOKEN = Bodydata.adata.accesstoken.token\r",
+									"var Userid = Bodydata.adata.userid\r",
+									"console.log(TOKEN)\r",
+									"console.log(Userid)\r",
+									"pm.collectionVariables.set(\"TOKEN\",Bodydata.adata.accesstoken.token)\r",
+									"pm.collectionVariables.set(\"Userid\",Bodydata.adata.userid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"ranjit@assettl.com\",\"password\":\"Rjil@12345\",\"is_mobile\":false,\"otp\":\"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/API/Login/v7/Token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"API",
+								"Login",
+								"v7",
+								"Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateDriver",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var Driver = Bodydata.DriverID\r",
+									"console.log(Driver)\r",
+									"pm.collectionVariables.get\r",
+									"pm.collectionVariables.set(\"driver\", Bodydata.DriverID)\r",
+									"var dRIVERIMEI = Bodydata.imei\r",
+									"console.log(dRIVERIMEI)\r",
+									"pm.collectionVariables.set(\"DriverIMEI\",Bodydata.imei)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"bepa\",\"mno\":\"5346346346\",\"email\":\"\",\"licenseno\":\"\",\"licenseexpirydate\":\"\",\"contractorID\":null,\"badgeno\":\"\",\"aadhar\":\"\",\"pan\":\"\",\"addr\":\"\",\"sts\":true,\"driverType\":1,\"pwd\":\"482717\",\"adminid\":\"ranjit@assettl.com\",\"userid\":\"{{Userid}}\",\"clientID\":\"11\",\"enterpriseCode\":\"1007\",\"roleId\":\"\",\"img\":\"\",\"moduleType\":null,\"saveMode\":\"create\",\"multipleFilePath\":null}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/fleetmaster/driver/v3/createAndUpdateDriver",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"fleetmaster",
+								"driver",
+								"v3",
+								"createAndUpdateDriver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateDriver",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\"name\":\"bepa\",\"mno\":\"5346346346\",\"email\":\"\",\"licenseno\":\"\",\"licenseexpirydate\":\"\",\"contractorID\":null,\"badgeno\":\"\",\"aadhar\":\"\",\"pan\":\"\",\"addr\":\"\",\"sts\":true,\"driverType\":1,\"pwd\":\"482717\",\"adminid\":\"ranjit@assettl.com\",\"userid\":\"{{Userid}}\",\"clientID\":\"11\",\"enterpriseCode\":\"1007\",\"roleId\":\"\",\"img\":\"\",\"moduleType\":null,\"saveMode\":\"modify\",\"multipleFilePath\":null}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/fleetmaster/driver/v3/createAndUpdateDriver",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"fleetmaster",
+								"driver",
+								"v3",
+								"createAndUpdateDriver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDriverList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clinetID\": \"11\",\r\n    \"userid\": \"{{Userid}}\",\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"size\": \"50\",\r\n    \"pageNo\": 0,\r\n    \"searchText\": \"\",\r\n    \"isExcel\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Fleetmaster/driver/v4/getDriverList",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Fleetmaster",
+								"driver",
+								"v4",
+								"getDriverList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetContractorList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientID\": \"11\",\r\n    \"userID\":  \"{{Userid}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhsthirdpartyapi/api/configuration/v1/getOrderDropDown",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhsthirdpartyapi",
+								"api",
+								"configuration",
+								"v1",
+								"getOrderDropDown"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device",
+			"item": [
+				{
+					"name": "Device create and update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\"IMEI\":\"7346346346346470\",\"IMSI\":\"7346346346346470\",\"loginId\":\"ranjit@assettl.com\",\"clientId\":\"11\",\"device\":1,\"deviceModel\":1,\"deviceSimNo\":\"787466643643\",\"deviceType\":1,\"deviceVendor\":5,\"saveMode\":\"create\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Tracker/v1/checkDeviceImei",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Tracker",
+								"v1",
+								"checkDeviceImei"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Device  update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IMEI\": \"{{IMEI}}\",\r\n    \"IMSI\": \"{{IMSI}}\",\r\n    \"loginId\": \"ranjit@assettl.com\",\r\n    \"clientId\": \"11\",\r\n    \"device\": 1,\r\n    \"deviceModel\": 1,\r\n    \"deviceSimNo\": \"565465465464565\",\r\n    \"deviceType\": 1,\r\n    \"deviceVendor\": 5,\r\n    \"saveMode\": \"modify\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Tracker/v3/addwhitelistedimei",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Tracker",
+								"v3",
+								"addwhitelistedimei"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Device details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": \"11\",\r\n    \"loginId\": \"ranjit@assettl.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/WhiteList/v3/Details",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"WhiteList",
+								"v3",
+								"Details"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Vehicle NoTracker create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var Fleet = Bodydata.fleetID\r",
+									"console.log(Fleet)\r",
+									"pm.collectionVariables.set(\"Fleetid\",Bodydata.fleetID)\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"alert\": {\r\n        \"ownerMobileNo\": \"\",\r\n        \"ownerName\": \"\",\r\n        \"sendAlert\": 0\r\n    },\r\n    \"device\": {\r\n        \"devicevendorId\": null,\r\n        \"vendordeviceModel\": 5,\r\n        \"imsi\": \"\",\r\n        \"simNo\": \"\"\r\n    },\r\n    \"dimension\": {\r\n        \"height\": \"\",\r\n        \"heightExtended\": \"\",\r\n        \"length\": \"\",\r\n        \"width\": \"\"\r\n    },\r\n    \"fuel\": {\r\n        \"mileageInCity\": \"\",\r\n        \"mileageInCombined\": \"\",\r\n        \"mileageInHighway\": \"\",\r\n        \"quality\": \"\",\r\n        \"tankCapacity\": \"\",\r\n        \"type\": \"PETROL\"\r\n    },\r\n    \"loading\": {\r\n        \"cargoVolume\": \"\",\r\n        \"grossVehicleWeightRate\": \"\",\r\n        \"height\": \"\",\r\n        \"heightExtended\": \"\",\r\n        \"length\": \"\",\r\n        \"maxPayload\": \"\",\r\n        \"passengerVolume\": \"\",\r\n        \"width\": \"\"\r\n    },\r\n    \"loginId\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"moduleType\": 3,\r\n    \"pdid\": \"\",\r\n    \"saveMode\": \"Create\",\r\n    \"fleetID\": \"\",\r\n    \"updatedAtJio\": \"\",\r\n    \"vehicle\": {\r\n        \"tagName\": \"{{tagName1}}\",\r\n        \"regNo\": \"{{VehicleReg}}\",\r\n        \"type\": 21,\r\n        \"make\": 46,\r\n        \"model\": 2152,\r\n        \"year\": \"1952\",\r\n        \"odometerReading\": \"\",\r\n        \"odometerReadingDate\": \"\",\r\n        \"renweldate\": \"\",\r\n        \"trimLevel\": \"\",\r\n        \"vinNo\": \"\",\r\n        \"status\": 1,\r\n        \"multipleFiles\": null\r\n    },\r\n    \"driver\": {\r\n        \"driverID\": \"{{driver}}\",\r\n        \"driverName\": \"{{dname}}\",\r\n        \"drivermobile\": \"{{dmno}}\",\r\n        \"driverCategeory\": 1,\r\n        \"driverIMEI\": \"{{DriverIMEI}}\",\r\n        \"contractorMno\": \"\"\r\n    },\r\n    \"contractor\": {\r\n        \"contractorName\": \"\",\r\n        \"contractorMno\": \"\"\r\n    },\r\n    \"displayname\": \"\",\r\n    \"hasnoTracker\": true,\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"clientid\": \"11\",\r\n    \"enterprisename\": \"RCP\",\r\n    \"roleId\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Tracker/v3/vehicle",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Tracker",
+								"v3",
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle No Tracker  update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"alert\": {\r\n        \"ownerMobileNo\": \"\",\r\n        \"ownerName\": \"\",\r\n        \"sendAlert\": 0\r\n    },\r\n    \"device\": {\r\n        \"devicevendorId\": null,\r\n        \"vendordeviceModel\": 5,\r\n        \"imsi\": \"\",\r\n        \"simNo\": \"\"\r\n    },\r\n    \"dimension\": {\r\n        \"height\": \"\",\r\n        \"heightExtended\": \"\",\r\n        \"length\": \"\",\r\n        \"width\": \"\"\r\n    },\r\n    \"fuel\": {\r\n        \"mileageInCity\": \"\",\r\n        \"mileageInCombined\": \"\",\r\n        \"mileageInHighway\": \"\",\r\n        \"quality\": \"\",\r\n        \"tankCapacity\": \"\",\r\n        \"type\": \"DIESEL\"\r\n    },\r\n    \"loading\": {\r\n        \"cargoVolume\": \"\",\r\n        \"grossVehicleWeightRate\": \"\",\r\n        \"height\": \"\",\r\n        \"heightExtended\": \"\",\r\n        \"length\": \"\",\r\n        \"maxPayload\": \"\",\r\n        \"passengerVolume\": \"\",\r\n        \"width\": \"\"\r\n    },\r\n    \"loginId\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"moduleType\": 3,\r\n    \"pdid\": \"\",\r\n    \"saveMode\": \"Modify\",\r\n    \"fleetID\": \"\",\r\n    \"updatedAtJio\": \"\",\r\n    \"vehicle\": {\r\n        \"tagName\": \"{{tagName2}}\",\r\n        \"regNo\": \"{{VehicleReg1}}\",\r\n        \"type\": 21,\r\n        \"make\": 46,\r\n        \"model\": 2151,\r\n        \"year\": \"1950\",\r\n        \"odometerReading\": \"\",\r\n        \"odometerReadingDate\": \"\",\r\n        \"renweldate\": \"\",\r\n        \"trimLevel\": \"\",\r\n        \"vinNo\": \"\",\r\n        \"status\": 1,\r\n        \"multipleFiles\": null\r\n    },\r\n    \"driver\": {\r\n        \"driverID\": \"{{driver}}\",\r\n        \"driverName\": \"{{dname}}\",\r\n        \"drivermobile\": \"{{dmno}}\",\r\n        \"driverCategeory\": 1,\r\n        \"driverIMEI\": \"1273000000005375\",\r\n        \"contractorMno\": \"\"\r\n    },\r\n    \"contractor\": {\r\n        \"contractorName\": \"\",\r\n        \"contractorMno\": \"\"\r\n    },\r\n    \"displayname\": \"\",\r\n    \"hasnoTracker\": true,\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"clientid\": \"11\",\r\n    \"enterprisename\": \"RCP\",\r\n    \"roleId\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Tracker/v3/vehicle",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Tracker",
+								"v3",
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle dropdown data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vType\": null,\r\n    \"vManufacturer\": null,\r\n    \"vModel\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/JME/Configuration/v1/vehicleOEM/VehicleDropdown",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"JME",
+								"Configuration",
+								"v1",
+								"vehicleOEM",
+								"VehicleDropdown"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trips",
+			"item": [
+				{
+					"name": "Verifyotp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email_mno\":\"ranjit@assettl.com\",\"pwd_passcode\":\"Rjil@12345\",\"is_mobile\":false}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/API/login/v5/loginWithOTP",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"API",
+								"login",
+								"v5",
+								"loginWithOTP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get token Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var value = Bodydata.adata.accesstoken.token\r",
+									"var user = Bodydata.adata.userid\r",
+									"console.log(value)\r",
+									"pm.collectionVariables.set(\"Token3\",Bodydata.adata.accesstoken.token)\r",
+									"pm.collectionVariables.set(\"Userid1\",Bodydata.adata.userid)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"ranjit@assettl.com\",\"password\":\"Rjil@12345\",\"is_mobile\":false,\"otp\":\"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/API/Login/v7/Token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"API",
+								"Login",
+								"v7",
+								"Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get token Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var value = Bodydata.adata.accesstoken.token\r",
+									"console.log(value)\r",
+									"pm.collectionVariables.set(\"Token1\",Bodydata.adata.accesstoken.token)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"ranjit@assettl.com\",\"password\":\"Rjil@12345\",\"is_mobile\":false,\"otp\":\"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/API/Login/v3/Token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"API",
+								"Login",
+								"v3",
+								"Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTrip/V3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var BOOK = Bodydata.data[0].bookingid\r",
+									"console.log(BOOK)\r",
+									"pm.collectionVariables.set(\"BOOKINGID\",Bodydata.data.bookingid)\r",
+									"\r",
+									"\r",
+									"var IM = Bodydata.data[0].driver.imei\r",
+									"console.log(IM)\r",
+									"pm.collectionVariables.set(\"IMEI1\",Bodydata.data[0].driver.imei)\r",
+									"var PD  = Bodydata.data[0].vehicle.pdid\r",
+									"console.log(PD)\r",
+									"pm.collectionVariables.set(\"PDID\",Bodydata.data[0].vehicle.pdid)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token3}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"addr\": \"\",\r\n        \"lat\": \"\",\r\n        \"lon\": \"\",\r\n        \"state\": \"\",\r\n        \"orgname\": \"\",\r\n        \"locname\": \"\",\r\n        \"orgid\": \"\"\r\n    },\r\n    \"consignor\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"addr\": \"\",\r\n        \"lat\": \"\",\r\n        \"lon\": \"\",\r\n        \"state\": \"\",\r\n        \"orgname\": \"\",\r\n        \"location\": \"\",\r\n        \"orgid\": \"\",\r\n        \"det_radius\": \"\",\r\n        \"speedlimit\": \"\",\r\n        \"display_name\": \"\",\r\n        \"lookupid\": \"\",\r\n        \"lookuptype\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"source\": \"\"\r\n    },\r\n    \"consignee\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"addr\": \"\",\r\n        \"lat\": \"\",\r\n        \"lon\": \"\",\r\n        \"state\": \"\",\r\n        \"orgname\": \"\",\r\n        \"location\": \"\",\r\n        \"orgid\": \"\",\r\n        \"det_radius\": \"\",\r\n        \"speedlimit\": \"\",\r\n        \"display_name\": \"\",\r\n        \"lookupid\": \"\",\r\n        \"lookuptype\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"source\": \"\"\r\n    },\r\n    \"source\": {\r\n        \"lat\": 18.9894044,\r\n        \"lon\": 73.1175157,\r\n        \"addr\": \"Panvel, Navi Mumbai, Maharashtra, India\",\r\n        \"state\": \"Maharashtra\",\r\n        \"landmark\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"name\": \"\",\r\n        \"display_name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"invoices\": []\r\n    },\r\n    \"destination\": {\r\n        \"lat\": 19.9974503,\r\n        \"lon\": 73.7898027,\r\n        \"addr\": \"Nashik, Maharashtra, India\",\r\n        \"state\": \"Maharashtra\",\r\n        \"landmark\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"name\": \"\",\r\n        \"display_name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"invoices\": []\r\n    },\r\n    \"organization\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\"\r\n    },\r\n    \"trucktype\": \"Truck\",\r\n    \"capacity\": \"0-5\",\r\n    \"trucktypeid\": \"21\",\r\n    \"capacityid\": \"1\",\r\n    \"materialInfo\": {\r\n        \"crts\": \"1646661398386\",\r\n        \"desc\": \"new cabinets56\",\r\n        \"hsncode\": \"\",\r\n        \"mcode\": \"HY67\",\r\n        \"mtid\": \"d6252c2c-93e8-ab4e-7cda-265eea238793\",\r\n        \"mtype\": \"\",\r\n        \"name\": \"new mailto:cabinetss\",\r\n        \"skucode\": \"\",\r\n        \"status\": 1,\r\n        \"upby\": \"\",\r\n        \"upst\": \"1654264106028\"\r\n    },\r\n    \"returntrip\": false,\r\n    \"comments\": \"\",\r\n    \"touchpointradius\": null,\r\n    \"touchpoints\": [],\r\n    \"tripduration\": \"\",\r\n    \"etafare\": 0,\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"userid\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"etatime\": \"4 hours 5 minutes \",\r\n    \"totaletasec\": 14751,\r\n    \"etakms\": \"171.622 KM\",\r\n    \"driver\": {\r\n        \"name\": \"{{dname}}\",\r\n        \"mno\": \"{{dmno}}\",\r\n        \"imei\": \"{{IMEI}}\",\r\n        \"regno\": \"MH01BY9663\"\r\n    },\r\n    \"availableVehSts\": false,\r\n    \"buffeta\": \"\",\r\n    \"toteta\": \"3 hours 2 minutes \",\r\n    \"vehicle\": {\r\n        \"tagname\": \"{{tagName1}}\",\r\n        \"regno\": \"{{VehicleReg}}\",\r\n        \"pdid\": \"{{PDID}}\",\r\n        \"model\": \"Tata Safari SUV\",\r\n        \"type\": \"Truck\"\r\n    },\r\n    \"readingkm\": {\r\n        \"start\": 0,\r\n        \"end\": 0,\r\n        \"distance\": 0\r\n    },\r\n    \"billingtype\": \"fixed\",\r\n    \"cost\": {},\r\n    \"totalpayble\": 0,\r\n    \"type\": \"03\",\r\n    \"tripassigntype\": 1,\r\n    \"getdriverconsent\": \"False\",\r\n    \"simtracktype\": \"N\",\r\n    \"enterprisename\": \"RCP\",\r\n    \"simtrackingstatus\": 2,\r\n    \"stopsduration\": {\r\n        \"day\": 0,\r\n        \"hours\": 0,\r\n        \"minutes\": 0\r\n    },\r\n    \"estimatedDistance\": 172,\r\n    \"isTripRecurring\": false,\r\n    \"tripRecurringType\": \"\",\r\n    \"additionaldrivers\": [],\r\n    \"expectedETA\": {\r\n        \"text\": \"3 hours 2 minutes \",\r\n        \"value\": 10961.663225806453\r\n    },\r\n    \"tripinfo\": {\r\n        \"shipmentNos\": [],\r\n        \"lorryrecieptNos\": [],\r\n        \"docs\": []\r\n    },\r\n    \"tripmodel\": \"Forward\",\r\n    \"destETA\": \"3 hours 2 minutes \",\r\n    \"destDist\": 171622,\r\n    \"pickupdate\": 1668778530000,\r\n    \"waypoints\": [],\r\n    \"direction_points\": [\r\n        {\r\n            \"lat\": 18.9894,\r\n            \"lng\": 73.11752\r\n        },\r\n        {\r\n            \"lat\": 18.989430000000002,\r\n            \"lng\": 73.11592\r\n        },\r\n        {\r\n            \"lat\": 18.99048,\r\n            \"lng\": 73.11558000000001\r\n        },\r\n        {\r\n            \"lat\": 18.99268,\r\n            \"lng\": 73.11527000000001\r\n        },\r\n        {\r\n            \"lat\": 18.9952,\r\n            \"lng\": 73.11382\r\n        },\r\n        {\r\n            \"lat\": 18.997680000000003,\r\n            \"lng\": 73.11074\r\n        },\r\n        {\r\n            \"lat\": 19.000110000000003,\r\n            \"lng\": 73.10744000000001\r\n        },\r\n        {\r\n            \"lat\": 19.00619,\r\n            \"lng\": 73.10759\r\n        },\r\n        {\r\n            \"lat\": 19.0137,\r\n            \"lng\": 73.10712000000001\r\n        },\r\n        {\r\n            \"lat\": 19.01781,\r\n            \"lng\": 73.10613000000001\r\n        },\r\n        {\r\n            \"lat\": 19.02102,\r\n            \"lng\": 73.10624\r\n        },\r\n        {\r\n            \"lat\": 19.03931,\r\n            \"lng\": 73.10448000000001\r\n        },\r\n        {\r\n            \"lat\": 19.0452,\r\n            \"lng\": 73.10342\r\n        },\r\n        {\r\n            \"lat\": 19.05026,\r\n            \"lng\": 73.10092\r\n        },\r\n        {\r\n            \"lat\": 19.06097,\r\n            \"lng\": 73.0961\r\n        },\r\n        {\r\n            \"lat\": 19.07226,\r\n            \"lng\": 73.08940000000001\r\n        },\r\n        {\r\n            \"lat\": 19.07993,\r\n            \"lng\": 73.08663\r\n        },\r\n        {\r\n            \"lat\": 19.086170000000003,\r\n            \"lng\": 73.08134000000001\r\n        },\r\n        {\r\n            \"lat\": 19.09569,\r\n            \"lng\": 73.07332000000001\r\n        },\r\n        {\r\n            \"lat\": 19.100830000000002,\r\n            \"lng\": 73.06947000000001\r\n        },\r\n        {\r\n            \"lat\": 19.110010000000003,\r\n            \"lng\": 73.06469000000001\r\n        },\r\n        {\r\n            \"lat\": 19.113590000000002,\r\n            \"lng\": 73.06077\r\n        },\r\n        {\r\n            \"lat\": 19.119010000000003,\r\n            \"lng\": 73.05692\r\n        },\r\n        {\r\n            \"lat\": 19.124180000000003,\r\n            \"lng\": 73.05517\r\n        },\r\n        {\r\n            \"lat\": 19.127380000000002,\r\n            \"lng\": 73.05502\r\n        },\r\n        {\r\n            \"lat\": 19.132990000000003,\r\n            \"lng\": 73.05224000000001\r\n        },\r\n        {\r\n            \"lat\": 19.13794,\r\n            \"lng\": 73.05019\r\n        },\r\n        {\r\n            \"lat\": 19.14299,\r\n            \"lng\": 73.04675\r\n        },\r\n        {\r\n            \"lat\": 19.144340000000003,\r\n            \"lng\": 73.04406\r\n        },\r\n        {\r\n            \"lat\": 19.14572,\r\n            \"lng\": 73.04195\r\n        },\r\n        {\r\n            \"lat\": 19.148690000000002,\r\n            \"lng\": 73.03890000000001\r\n        },\r\n        {\r\n            \"lat\": 19.15114,\r\n            \"lng\": 73.03551\r\n        },\r\n        {\r\n            \"lat\": 19.1533,\r\n            \"lng\": 73.03428000000001\r\n        },\r\n        {\r\n            \"lat\": 19.156100000000002,\r\n            \"lng\": 73.03214000000001\r\n        },\r\n        {\r\n            \"lat\": 19.15951,\r\n            \"lng\": 73.03015\r\n        },\r\n        {\r\n            \"lat\": 19.160600000000002,\r\n            \"lng\": 73.02761000000001\r\n        },\r\n        {\r\n            \"lat\": 19.16214,\r\n            \"lng\": 73.02297\r\n        },\r\n        {\r\n            \"lat\": 19.16345,\r\n            \"lng\": 73.02114\r\n        },\r\n        {\r\n            \"lat\": 19.16608,\r\n            \"lng\": 73.0211\r\n        },\r\n        {\r\n            \"lat\": 19.169600000000003,\r\n            \"lng\": 73.02217\r\n        },\r\n        {\r\n            \"lat\": 19.171190000000003,\r\n            \"lng\": 73.02168\r\n        },\r\n        {\r\n            \"lat\": 19.170830000000002,\r\n            \"lng\": 73.01933000000001\r\n        },\r\n        {\r\n            \"lat\": 19.17141,\r\n            \"lng\": 73.0181\r\n        },\r\n        {\r\n            \"lat\": 19.174300000000002,\r\n            \"lng\": 73.01704000000001\r\n        },\r\n        {\r\n            \"lat\": 19.180760000000003,\r\n            \"lng\": 73.01920000000001\r\n        },\r\n        {\r\n            \"lat\": 19.18381,\r\n            \"lng\": 73.01945\r\n        },\r\n        {\r\n            \"lat\": 19.18596,\r\n            \"lng\": 73.01914000000001\r\n        },\r\n        {\r\n            \"lat\": 19.19294,\r\n            \"lng\": 73.02082\r\n        },\r\n        {\r\n            \"lat\": 19.197670000000002,\r\n            \"lng\": 73.0228\r\n        },\r\n        {\r\n            \"lat\": 19.199520000000003,\r\n            \"lng\": 73.02293\r\n        },\r\n        {\r\n            \"lat\": 19.2043,\r\n            \"lng\": 73.01915000000001\r\n        },\r\n        {\r\n            \"lat\": 19.21076,\r\n            \"lng\": 73.01609\r\n        },\r\n        {\r\n            \"lat\": 19.21496,\r\n            \"lng\": 73.0112\r\n        },\r\n        {\r\n            \"lat\": 19.21622,\r\n            \"lng\": 73.00906\r\n        },\r\n        {\r\n            \"lat\": 19.213720000000002,\r\n            \"lng\": 73.00634000000001\r\n        },\r\n        {\r\n            \"lat\": 19.21293,\r\n            \"lng\": 73.00617000000001\r\n        },\r\n        {\r\n            \"lat\": 19.212380000000003,\r\n            \"lng\": 73.00699\r\n        },\r\n        {\r\n            \"lat\": 19.215390000000003,\r\n            \"lng\": 73.01035\r\n        },\r\n        {\r\n            \"lat\": 19.224020000000003,\r\n            \"lng\": 73.01915000000001\r\n        },\r\n        {\r\n            \"lat\": 19.236720000000002,\r\n            \"lng\": 73.03683000000001\r\n        },\r\n        {\r\n            \"lat\": 19.24867,\r\n            \"lng\": 73.05102000000001\r\n        },\r\n        {\r\n            \"lat\": 19.25513,\r\n            \"lng\": 73.06195000000001\r\n        },\r\n        {\r\n            \"lat\": 19.2662,\r\n            \"lng\": 73.07842000000001\r\n        },\r\n        {\r\n            \"lat\": 19.27558,\r\n            \"lng\": 73.09339\r\n        },\r\n        {\r\n            \"lat\": 19.2805,\r\n            \"lng\": 73.10121000000001\r\n        },\r\n        {\r\n            \"lat\": 19.284260000000003,\r\n            \"lng\": 73.10571\r\n        },\r\n        {\r\n            \"lat\": 19.2893,\r\n            \"lng\": 73.1085\r\n        },\r\n        {\r\n            \"lat\": 19.295440000000003,\r\n            \"lng\": 73.10909000000001\r\n        },\r\n        {\r\n            \"lat\": 19.311410000000002,\r\n            \"lng\": 73.10730000000001\r\n        },\r\n        {\r\n            \"lat\": 19.31493,\r\n            \"lng\": 73.10690000000001\r\n        },\r\n        {\r\n            \"lat\": 19.32543,\r\n            \"lng\": 73.10904000000001\r\n        },\r\n        {\r\n            \"lat\": 19.33407,\r\n            \"lng\": 73.11173000000001\r\n        },\r\n        {\r\n            \"lat\": 19.338710000000003,\r\n            \"lng\": 73.11408\r\n        },\r\n        {\r\n            \"lat\": 19.34212,\r\n            \"lng\": 73.11773000000001\r\n        },\r\n        {\r\n            \"lat\": 19.34392,\r\n            \"lng\": 73.12104000000001\r\n        },\r\n        {\r\n            \"lat\": 19.345010000000002,\r\n            \"lng\": 73.12872\r\n        },\r\n        {\r\n            \"lat\": 19.34516,\r\n            \"lng\": 73.13380000000001\r\n        },\r\n        {\r\n            \"lat\": 19.348650000000003,\r\n            \"lng\": 73.14227000000001\r\n        },\r\n        {\r\n            \"lat\": 19.35247,\r\n            \"lng\": 73.14911000000001\r\n        },\r\n        {\r\n            \"lat\": 19.35592,\r\n            \"lng\": 73.15572\r\n        },\r\n        {\r\n            \"lat\": 19.35704,\r\n            \"lng\": 73.15875000000001\r\n        },\r\n        {\r\n            \"lat\": 19.359270000000002,\r\n            \"lng\": 73.16264000000001\r\n        },\r\n        {\r\n            \"lat\": 19.36201,\r\n            \"lng\": 73.16663000000001\r\n        },\r\n        {\r\n            \"lat\": 19.363590000000002,\r\n            \"lng\": 73.17057000000001\r\n        },\r\n        {\r\n            \"lat\": 19.368560000000002,\r\n            \"lng\": 73.18418000000001\r\n        },\r\n        {\r\n            \"lat\": 19.372310000000002,\r\n            \"lng\": 73.19688000000001\r\n        },\r\n        {\r\n            \"lat\": 19.37369,\r\n            \"lng\": 73.20154000000001\r\n        },\r\n        {\r\n            \"lat\": 19.37561,\r\n            \"lng\": 73.20449\r\n        },\r\n        {\r\n            \"lat\": 19.380080000000003,\r\n            \"lng\": 73.21231\r\n        },\r\n        {\r\n            \"lat\": 19.38184,\r\n            \"lng\": 73.21675\r\n        },\r\n        {\r\n            \"lat\": 19.383550000000003,\r\n            \"lng\": 73.21954000000001\r\n        },\r\n        {\r\n            \"lat\": 19.38699,\r\n            \"lng\": 73.22622000000001\r\n        },\r\n        {\r\n            \"lat\": 19.393140000000002,\r\n            \"lng\": 73.23363\r\n        },\r\n        {\r\n            \"lat\": 19.40192,\r\n            \"lng\": 73.24794\r\n        },\r\n        {\r\n            \"lat\": 19.40916,\r\n            \"lng\": 73.25773000000001\r\n        },\r\n        {\r\n            \"lat\": 19.413030000000003,\r\n            \"lng\": 73.26428\r\n        },\r\n        {\r\n            \"lat\": 19.41432,\r\n            \"lng\": 73.27085000000001\r\n        },\r\n        {\r\n            \"lat\": 19.415180000000003,\r\n            \"lng\": 73.27541000000001\r\n        },\r\n        {\r\n            \"lat\": 19.416430000000002,\r\n            \"lng\": 73.27693000000001\r\n        },\r\n        {\r\n            \"lat\": 19.422150000000002,\r\n            \"lng\": 73.28204000000001\r\n        },\r\n        {\r\n            \"lat\": 19.42509,\r\n            \"lng\": 73.28739\r\n        },\r\n        {\r\n            \"lat\": 19.427100000000003,\r\n            \"lng\": 73.28946\r\n        },\r\n        {\r\n            \"lat\": 19.428700000000003,\r\n            \"lng\": 73.29139\r\n        },\r\n        {\r\n            \"lat\": 19.432350000000003,\r\n            \"lng\": 73.29334\r\n        },\r\n        {\r\n            \"lat\": 19.4371,\r\n            \"lng\": 73.29766000000001\r\n        },\r\n        {\r\n            \"lat\": 19.443170000000002,\r\n            \"lng\": 73.30367000000001\r\n        },\r\n        {\r\n            \"lat\": 19.445050000000002,\r\n            \"lng\": 73.30815000000001\r\n        },\r\n        {\r\n            \"lat\": 19.445320000000002,\r\n            \"lng\": 73.31536000000001\r\n        },\r\n        {\r\n            \"lat\": 19.44529,\r\n            \"lng\": 73.32269000000001\r\n        },\r\n        {\r\n            \"lat\": 19.446260000000002,\r\n            \"lng\": 73.32713000000001\r\n        },\r\n        {\r\n            \"lat\": 19.449260000000002,\r\n            \"lng\": 73.33104\r\n        },\r\n        {\r\n            \"lat\": 19.45289,\r\n            \"lng\": 73.33276000000001\r\n        },\r\n        {\r\n            \"lat\": 19.46149,\r\n            \"lng\": 73.33436\r\n        },\r\n        {\r\n            \"lat\": 19.467470000000002,\r\n            \"lng\": 73.33462\r\n        },\r\n        {\r\n            \"lat\": 19.47194,\r\n            \"lng\": 73.334\r\n        },\r\n        {\r\n            \"lat\": 19.477410000000003,\r\n            \"lng\": 73.33193\r\n        },\r\n        {\r\n            \"lat\": 19.48178,\r\n            \"lng\": 73.33204\r\n        },\r\n        {\r\n            \"lat\": 19.487280000000002,\r\n            \"lng\": 73.33092\r\n        },\r\n        {\r\n            \"lat\": 19.490000000000002,\r\n            \"lng\": 73.33253\r\n        },\r\n        {\r\n            \"lat\": 19.493740000000003,\r\n            \"lng\": 73.33394000000001\r\n        },\r\n        {\r\n            \"lat\": 19.498450000000002,\r\n            \"lng\": 73.33281000000001\r\n        },\r\n        {\r\n            \"lat\": 19.504830000000002,\r\n            \"lng\": 73.3292\r\n        },\r\n        {\r\n            \"lat\": 19.50843,\r\n            \"lng\": 73.32832\r\n        },\r\n        {\r\n            \"lat\": 19.51161,\r\n            \"lng\": 73.32916\r\n        },\r\n        {\r\n            \"lat\": 19.514310000000002,\r\n            \"lng\": 73.33101\r\n        },\r\n        {\r\n            \"lat\": 19.519150000000003,\r\n            \"lng\": 73.33659\r\n        },\r\n        {\r\n            \"lat\": 19.52242,\r\n            \"lng\": 73.33871\r\n        },\r\n        {\r\n            \"lat\": 19.529400000000003,\r\n            \"lng\": 73.34032\r\n        },\r\n        {\r\n            \"lat\": 19.537920000000003,\r\n            \"lng\": 73.34693\r\n        },\r\n        {\r\n            \"lat\": 19.54134,\r\n            \"lng\": 73.34914\r\n        },\r\n        {\r\n            \"lat\": 19.543000000000003,\r\n            \"lng\": 73.35026\r\n        },\r\n        {\r\n            \"lat\": 19.543670000000002,\r\n            \"lng\": 73.35162000000001\r\n        },\r\n        {\r\n            \"lat\": 19.54439,\r\n            \"lng\": 73.35561000000001\r\n        },\r\n        {\r\n            \"lat\": 19.547790000000003,\r\n            \"lng\": 73.36178000000001\r\n        },\r\n        {\r\n            \"lat\": 19.55037,\r\n            \"lng\": 73.36519000000001\r\n        },\r\n        {\r\n            \"lat\": 19.558010000000003,\r\n            \"lng\": 73.37334000000001\r\n        },\r\n        {\r\n            \"lat\": 19.561690000000002,\r\n            \"lng\": 73.375\r\n        },\r\n        {\r\n            \"lat\": 19.565330000000003,\r\n            \"lng\": 73.37547\r\n        },\r\n        {\r\n            \"lat\": 19.57082,\r\n            \"lng\": 73.37445000000001\r\n        },\r\n        {\r\n            \"lat\": 19.57421,\r\n            \"lng\": 73.37669000000001\r\n        },\r\n        {\r\n            \"lat\": 19.57583,\r\n            \"lng\": 73.38024\r\n        },\r\n        {\r\n            \"lat\": 19.577160000000003,\r\n            \"lng\": 73.38202000000001\r\n        },\r\n        {\r\n            \"lat\": 19.580260000000003,\r\n            \"lng\": 73.38315\r\n        },\r\n        {\r\n            \"lat\": 19.58415,\r\n            \"lng\": 73.38637\r\n        },\r\n        {\r\n            \"lat\": 19.587590000000002,\r\n            \"lng\": 73.39009\r\n        },\r\n        {\r\n            \"lat\": 19.59268,\r\n            \"lng\": 73.39222000000001\r\n        },\r\n        {\r\n            \"lat\": 19.596400000000003,\r\n            \"lng\": 73.39176\r\n        },\r\n        {\r\n            \"lat\": 19.59981,\r\n            \"lng\": 73.39407\r\n        },\r\n        {\r\n            \"lat\": 19.6036,\r\n            \"lng\": 73.39725\r\n        },\r\n        {\r\n            \"lat\": 19.608150000000002,\r\n            \"lng\": 73.39827000000001\r\n        },\r\n        {\r\n            \"lat\": 19.610100000000003,\r\n            \"lng\": 73.40073000000001\r\n        },\r\n        {\r\n            \"lat\": 19.609810000000003,\r\n            \"lng\": 73.4041\r\n        },\r\n        {\r\n            \"lat\": 19.61061,\r\n            \"lng\": 73.40674\r\n        },\r\n        {\r\n            \"lat\": 19.61316,\r\n            \"lng\": 73.40872\r\n        },\r\n        {\r\n            \"lat\": 19.619510000000002,\r\n            \"lng\": 73.41774000000001\r\n        },\r\n        {\r\n            \"lat\": 19.62179,\r\n            \"lng\": 73.41959\r\n        },\r\n        {\r\n            \"lat\": 19.62871,\r\n            \"lng\": 73.42082\r\n        },\r\n        {\r\n            \"lat\": 19.631,\r\n            \"lng\": 73.42273\r\n        },\r\n        {\r\n            \"lat\": 19.631690000000003,\r\n            \"lng\": 73.42533\r\n        },\r\n        {\r\n            \"lat\": 19.63007,\r\n            \"lng\": 73.43303\r\n        },\r\n        {\r\n            \"lat\": 19.629060000000003,\r\n            \"lng\": 73.43533000000001\r\n        },\r\n        {\r\n            \"lat\": 19.62714,\r\n            \"lng\": 73.43854\r\n        },\r\n        {\r\n            \"lat\": 19.62714,\r\n            \"lng\": 73.44072000000001\r\n        },\r\n        {\r\n            \"lat\": 19.62864,\r\n            \"lng\": 73.44365\r\n        },\r\n        {\r\n            \"lat\": 19.62819,\r\n            \"lng\": 73.44917000000001\r\n        },\r\n        {\r\n            \"lat\": 19.6279,\r\n            \"lng\": 73.45509000000001\r\n        },\r\n        {\r\n            \"lat\": 19.626070000000002,\r\n            \"lng\": 73.46257\r\n        },\r\n        {\r\n            \"lat\": 19.62655,\r\n            \"lng\": 73.4649\r\n        },\r\n        {\r\n            \"lat\": 19.63043,\r\n            \"lng\": 73.47156000000001\r\n        },\r\n        {\r\n            \"lat\": 19.635620000000003,\r\n            \"lng\": 73.47995\r\n        },\r\n        {\r\n            \"lat\": 19.638160000000003,\r\n            \"lng\": 73.48319000000001\r\n        },\r\n        {\r\n            \"lat\": 19.640700000000002,\r\n            \"lng\": 73.48332\r\n        },\r\n        {\r\n            \"lat\": 19.64441,\r\n            \"lng\": 73.48230000000001\r\n        },\r\n        {\r\n            \"lat\": 19.64542,\r\n            \"lng\": 73.48391000000001\r\n        },\r\n        {\r\n            \"lat\": 19.647560000000002,\r\n            \"lng\": 73.48464000000001\r\n        },\r\n        {\r\n            \"lat\": 19.649,\r\n            \"lng\": 73.48684\r\n        },\r\n        {\r\n            \"lat\": 19.651680000000002,\r\n            \"lng\": 73.48880000000001\r\n        },\r\n        {\r\n            \"lat\": 19.652150000000002,\r\n            \"lng\": 73.49176\r\n        },\r\n        {\r\n            \"lat\": 19.651600000000002,\r\n            \"lng\": 73.49657\r\n        },\r\n        {\r\n            \"lat\": 19.652990000000003,\r\n            \"lng\": 73.49772\r\n        },\r\n        {\r\n            \"lat\": 19.65681,\r\n            \"lng\": 73.49768\r\n        },\r\n        {\r\n            \"lat\": 19.665860000000002,\r\n            \"lng\": 73.50062000000001\r\n        },\r\n        {\r\n            \"lat\": 19.67122,\r\n            \"lng\": 73.50061000000001\r\n        },\r\n        {\r\n            \"lat\": 19.675320000000003,\r\n            \"lng\": 73.50114\r\n        },\r\n        {\r\n            \"lat\": 19.678790000000003,\r\n            \"lng\": 73.50276000000001\r\n        },\r\n        {\r\n            \"lat\": 19.679070000000003,\r\n            \"lng\": 73.50199\r\n        },\r\n        {\r\n            \"lat\": 19.678050000000002,\r\n            \"lng\": 73.50077\r\n        },\r\n        {\r\n            \"lat\": 19.68117,\r\n            \"lng\": 73.49931000000001\r\n        },\r\n        {\r\n            \"lat\": 19.684790000000003,\r\n            \"lng\": 73.49873000000001\r\n        },\r\n        {\r\n            \"lat\": 19.687240000000003,\r\n            \"lng\": 73.49829000000001\r\n        },\r\n        {\r\n            \"lat\": 19.68814,\r\n            \"lng\": 73.49763\r\n        },\r\n        {\r\n            \"lat\": 19.689770000000003,\r\n            \"lng\": 73.49610000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69461,\r\n            \"lng\": 73.49728\r\n        },\r\n        {\r\n            \"lat\": 19.695500000000003,\r\n            \"lng\": 73.49654000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69656,\r\n            \"lng\": 73.49765000000001\r\n        },\r\n        {\r\n            \"lat\": 19.698020000000003,\r\n            \"lng\": 73.49743000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69808,\r\n            \"lng\": 73.49937\r\n        },\r\n        {\r\n            \"lat\": 19.69845,\r\n            \"lng\": 73.50004000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69961,\r\n            \"lng\": 73.49992\r\n        },\r\n        {\r\n            \"lat\": 19.70163,\r\n            \"lng\": 73.5004\r\n        },\r\n        {\r\n            \"lat\": 19.702260000000003,\r\n            \"lng\": 73.50101000000001\r\n        },\r\n        {\r\n            \"lat\": 19.70118,\r\n            \"lng\": 73.50176\r\n        },\r\n        {\r\n            \"lat\": 19.700930000000003,\r\n            \"lng\": 73.50252\r\n        },\r\n        {\r\n            \"lat\": 19.70007,\r\n            \"lng\": 73.50332\r\n        },\r\n        {\r\n            \"lat\": 19.698320000000002,\r\n            \"lng\": 73.50491000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69731,\r\n            \"lng\": 73.50669\r\n        },\r\n        {\r\n            \"lat\": 19.699990000000003,\r\n            \"lng\": 73.50710000000001\r\n        },\r\n        {\r\n            \"lat\": 19.70125,\r\n            \"lng\": 73.50766\r\n        },\r\n        {\r\n            \"lat\": 19.70043,\r\n            \"lng\": 73.50991\r\n        },\r\n        {\r\n            \"lat\": 19.698770000000003,\r\n            \"lng\": 73.51176000000001\r\n        },\r\n        {\r\n            \"lat\": 19.698960000000003,\r\n            \"lng\": 73.51298000000001\r\n        },\r\n        {\r\n            \"lat\": 19.696830000000002,\r\n            \"lng\": 73.52114\r\n        },\r\n        {\r\n            \"lat\": 19.69621,\r\n            \"lng\": 73.52349000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69679,\r\n            \"lng\": 73.52643\r\n        },\r\n        {\r\n            \"lat\": 19.69763,\r\n            \"lng\": 73.53003000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69601,\r\n            \"lng\": 73.53496000000001\r\n        },\r\n        {\r\n            \"lat\": 19.691660000000002,\r\n            \"lng\": 73.54757000000001\r\n        },\r\n        {\r\n            \"lat\": 19.688670000000002,\r\n            \"lng\": 73.55814000000001\r\n        },\r\n        {\r\n            \"lat\": 19.68653,\r\n            \"lng\": 73.56618\r\n        },\r\n        {\r\n            \"lat\": 19.686040000000002,\r\n            \"lng\": 73.57385000000001\r\n        },\r\n        {\r\n            \"lat\": 19.68759,\r\n            \"lng\": 73.58395\r\n        },\r\n        {\r\n            \"lat\": 19.688670000000002,\r\n            \"lng\": 73.58611\r\n        },\r\n        {\r\n            \"lat\": 19.69056,\r\n            \"lng\": 73.58779000000001\r\n        },\r\n        {\r\n            \"lat\": 19.693630000000002,\r\n            \"lng\": 73.58968\r\n        },\r\n        {\r\n            \"lat\": 19.69538,\r\n            \"lng\": 73.59258000000001\r\n        },\r\n        {\r\n            \"lat\": 19.696820000000002,\r\n            \"lng\": 73.59681\r\n        },\r\n        {\r\n            \"lat\": 19.70129,\r\n            \"lng\": 73.60597\r\n        },\r\n        {\r\n            \"lat\": 19.704880000000003,\r\n            \"lng\": 73.60916\r\n        },\r\n        {\r\n            \"lat\": 19.70701,\r\n            \"lng\": 73.61217\r\n        },\r\n        {\r\n            \"lat\": 19.71049,\r\n            \"lng\": 73.61678\r\n        },\r\n        {\r\n            \"lat\": 19.71769,\r\n            \"lng\": 73.62419000000001\r\n        },\r\n        {\r\n            \"lat\": 19.723920000000003,\r\n            \"lng\": 73.63002\r\n        },\r\n        {\r\n            \"lat\": 19.73177,\r\n            \"lng\": 73.63426000000001\r\n        },\r\n        {\r\n            \"lat\": 19.73542,\r\n            \"lng\": 73.63506000000001\r\n        },\r\n        {\r\n            \"lat\": 19.739050000000002,\r\n            \"lng\": 73.63754\r\n        },\r\n        {\r\n            \"lat\": 19.7405,\r\n            \"lng\": 73.63987\r\n        },\r\n        {\r\n            \"lat\": 19.742060000000002,\r\n            \"lng\": 73.64045\r\n        },\r\n        {\r\n            \"lat\": 19.746070000000003,\r\n            \"lng\": 73.6406\r\n        },\r\n        {\r\n            \"lat\": 19.74754,\r\n            \"lng\": 73.64248\r\n        },\r\n        {\r\n            \"lat\": 19.75146,\r\n            \"lng\": 73.64359\r\n        },\r\n        {\r\n            \"lat\": 19.755270000000003,\r\n            \"lng\": 73.64671000000001\r\n        },\r\n        {\r\n            \"lat\": 19.76182,\r\n            \"lng\": 73.65249\r\n        },\r\n        {\r\n            \"lat\": 19.76942,\r\n            \"lng\": 73.65821000000001\r\n        },\r\n        {\r\n            \"lat\": 19.777410000000003,\r\n            \"lng\": 73.66344000000001\r\n        },\r\n        {\r\n            \"lat\": 19.784640000000003,\r\n            \"lng\": 73.66678\r\n        },\r\n        {\r\n            \"lat\": 19.7935,\r\n            \"lng\": 73.67104\r\n        },\r\n        {\r\n            \"lat\": 19.796930000000003,\r\n            \"lng\": 73.67168000000001\r\n        },\r\n        {\r\n            \"lat\": 19.800880000000003,\r\n            \"lng\": 73.67118\r\n        },\r\n        {\r\n            \"lat\": 19.812820000000002,\r\n            \"lng\": 73.66973\r\n        },\r\n        {\r\n            \"lat\": 19.81727,\r\n            \"lng\": 73.66906\r\n        },\r\n        {\r\n            \"lat\": 19.82091,\r\n            \"lng\": 73.67067\r\n        },\r\n        {\r\n            \"lat\": 19.824930000000002,\r\n            \"lng\": 73.67337\r\n        },\r\n        {\r\n            \"lat\": 19.83132,\r\n            \"lng\": 73.67549000000001\r\n        },\r\n        {\r\n            \"lat\": 19.839250000000003,\r\n            \"lng\": 73.67707\r\n        },\r\n        {\r\n            \"lat\": 19.843230000000002,\r\n            \"lng\": 73.68052\r\n        },\r\n        {\r\n            \"lat\": 19.84544,\r\n            \"lng\": 73.68152\r\n        },\r\n        {\r\n            \"lat\": 19.84756,\r\n            \"lng\": 73.68162000000001\r\n        },\r\n        {\r\n            \"lat\": 19.85168,\r\n            \"lng\": 73.67963\r\n        },\r\n        {\r\n            \"lat\": 19.85426,\r\n            \"lng\": 73.68017\r\n        },\r\n        {\r\n            \"lat\": 19.8621,\r\n            \"lng\": 73.68437\r\n        },\r\n        {\r\n            \"lat\": 19.867610000000003,\r\n            \"lng\": 73.68794000000001\r\n        },\r\n        {\r\n            \"lat\": 19.87761,\r\n            \"lng\": 73.69137\r\n        },\r\n        {\r\n            \"lat\": 19.891070000000003,\r\n            \"lng\": 73.69525\r\n        },\r\n        {\r\n            \"lat\": 19.90426,\r\n            \"lng\": 73.7001\r\n        },\r\n        {\r\n            \"lat\": 19.91083,\r\n            \"lng\": 73.70534\r\n        },\r\n        {\r\n            \"lat\": 19.916500000000003,\r\n            \"lng\": 73.71144000000001\r\n        },\r\n        {\r\n            \"lat\": 19.922510000000003,\r\n            \"lng\": 73.71518\r\n        },\r\n        {\r\n            \"lat\": 19.92679,\r\n            \"lng\": 73.71781\r\n        },\r\n        {\r\n            \"lat\": 19.929810000000003,\r\n            \"lng\": 73.72143000000001\r\n        },\r\n        {\r\n            \"lat\": 19.932090000000002,\r\n            \"lng\": 73.72463\r\n        },\r\n        {\r\n            \"lat\": 19.932930000000002,\r\n            \"lng\": 73.72711000000001\r\n        },\r\n        {\r\n            \"lat\": 19.93553,\r\n            \"lng\": 73.73271000000001\r\n        },\r\n        {\r\n            \"lat\": 19.93634,\r\n            \"lng\": 73.73507000000001\r\n        },\r\n        {\r\n            \"lat\": 19.93891,\r\n            \"lng\": 73.73826000000001\r\n        },\r\n        {\r\n            \"lat\": 19.94377,\r\n            \"lng\": 73.74408000000001\r\n        },\r\n        {\r\n            \"lat\": 19.951510000000003,\r\n            \"lng\": 73.75280000000001\r\n        },\r\n        {\r\n            \"lat\": 19.95917,\r\n            \"lng\": 73.76107\r\n        },\r\n        {\r\n            \"lat\": 19.96592,\r\n            \"lng\": 73.76751\r\n        },\r\n        {\r\n            \"lat\": 19.96936,\r\n            \"lng\": 73.77019\r\n        },\r\n        {\r\n            \"lat\": 19.97484,\r\n            \"lng\": 73.77573000000001\r\n        },\r\n        {\r\n            \"lat\": 19.980050000000002,\r\n            \"lng\": 73.78009\r\n        },\r\n        {\r\n            \"lat\": 19.9848,\r\n            \"lng\": 73.78315\r\n        },\r\n        {\r\n            \"lat\": 19.9873,\r\n            \"lng\": 73.78398\r\n        },\r\n        {\r\n            \"lat\": 19.99023,\r\n            \"lng\": 73.78694\r\n        },\r\n        {\r\n            \"lat\": 19.99151,\r\n            \"lng\": 73.78887\r\n        },\r\n        {\r\n            \"lat\": 19.99409,\r\n            \"lng\": 73.79038\r\n        },\r\n        {\r\n            \"lat\": 19.994380000000003,\r\n            \"lng\": 73.79008\r\n        },\r\n        {\r\n            \"lat\": 19.99689,\r\n            \"lng\": 73.79052\r\n        },\r\n        {\r\n            \"lat\": 19.997490000000003,\r\n            \"lng\": 73.79001000000001\r\n        },\r\n        {\r\n            \"lat\": 19.99745,\r\n            \"lng\": 73.7898\r\n        }\r\n    ],\r\n    \"gstins\": [],\r\n    \"manualEwaybills\": [],\r\n    \"loginUserId\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"clientId\": \"11\",\r\n    \"size\": \"100\",\r\n    \"pageNo\": \"1\",\r\n    \"searchText\": \"\",\r\n    \"contyp\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/booking/v6/create_cargo_trip",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"booking",
+								"v6",
+								"create_cargo_trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTrip/V3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token3}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuseid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"addr\": \"\",\r\n        \"lat\": \"\",\r\n        \"lon\": \"\",\r\n        \"state\": \"\",\r\n        \"orgname\": \"\",\r\n        \"locname\": \"\",\r\n        \"orgid\": \"\"\r\n    },\r\n    \"consignor\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"addr\": \"\",\r\n        \"lat\": \"\",\r\n        \"lon\": \"\",\r\n        \"state\": \"\",\r\n        \"orgname\": \"\",\r\n        \"location\": \"\",\r\n        \"orgid\": \"\",\r\n        \"det_radius\": \"\",\r\n        \"speedlimit\": \"\",\r\n        \"display_name\": \"\",\r\n        \"lookupid\": \"\",\r\n        \"lookuptype\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"source\": \"\"\r\n    },\r\n    \"consignee\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"addr\": \"\",\r\n        \"lat\": \"\",\r\n        \"lon\": \"\",\r\n        \"state\": \"\",\r\n        \"orgname\": \"\",\r\n        \"location\": \"\",\r\n        \"orgid\": \"\",\r\n        \"det_radius\": \"\",\r\n        \"speedlimit\": \"\",\r\n        \"display_name\": \"\",\r\n        \"lookupid\": \"\",\r\n        \"lookuptype\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"source\": \"\"\r\n    },\r\n    \"source\": {\r\n        \"lat\": 18.9894044,\r\n        \"lon\": 73.1175157,\r\n        \"addr\": \"Panvel, Navi Mumbai, Maharashtra, India\",\r\n        \"state\": \"Maharashtra\",\r\n        \"landmark\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"name\": \"\",\r\n        \"display_name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"invoices\": []\r\n    },\r\n    \"destination\": {\r\n        \"lat\": 19.9974503,\r\n        \"lon\": 73.7898027,\r\n        \"addr\": \"Nashik, Maharashtra, India\",\r\n        \"state\": \"Maharashtra\",\r\n        \"landmark\": \"\",\r\n        \"city\": \"\",\r\n        \"pincode\": \"\",\r\n        \"code\": \"\",\r\n        \"name\": \"\",\r\n        \"display_name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\",\r\n        \"invoices\": []\r\n    },\r\n    \"organization\": {\r\n        \"name\": \"\",\r\n        \"mno\": \"\",\r\n        \"email\": \"\"\r\n    },\r\n    \"trucktype\": \"Truck\",\r\n    \"capacity\": \"0-5\",\r\n    \"trucktypeid\": \"21\",\r\n    \"capacityid\": \"1\",\r\n    \"materialInfo\": {\r\n        \"crts\": \"1646661398386\",\r\n        \"desc\": \"new cabinets56\",\r\n        \"hsncode\": \"\",\r\n        \"mcode\": \"HY67\",\r\n        \"mtid\": \"d6252c2c-93e8-ab4e-7cda-265eea238793\",\r\n        \"mtype\": \"\",\r\n        \"name\": \"new mailto:cabinetss\",\r\n        \"skucode\": \"\",\r\n        \"status\": 1,\r\n        \"upby\": \"\",\r\n        \"upst\": \"1654264106028\"\r\n    },\r\n    \"returntrip\": false,\r\n    \"comments\": \"\",\r\n    \"touchpointradius\": null,\r\n    \"touchpoints\": [],\r\n    \"tripduration\": \"\",\r\n    \"etafare\": 0,\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"userid\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"etatime\": \"4 hours 5 minutes \",\r\n    \"totaletasec\": 14751,\r\n    \"etakms\": \"171.622 KM\",\r\n    \"driver\": {\r\n        \"name\": \"vihaan\",\r\n        \"mno\": \"8976567888\",\r\n        \"imei\": \"911615400033364\",\r\n        \"regno\": \"MH01BY9663\"\r\n    },\r\n    \"availableVehSts\": false,\r\n    \"buffeta\": \"\",\r\n    \"toteta\": \"3 hours 2 minutes \",\r\n    \"vehicle\": {\r\n        \"tagname\": \"CT JVT1440 3364\",\r\n        \"regno\": \"MH01BY9663\",\r\n        \"pdid\": \"85c881b7561945528be655009a7cb259\",\r\n        \"model\": \"Tata Safari SUV\",\r\n        \"type\": \"Truck\"\r\n    },\r\n    \"readingkm\": {\r\n        \"start\": 0,\r\n        \"end\": 0,\r\n        \"distance\": 0\r\n    },\r\n    \"billingtype\": \"fixed\",\r\n    \"cost\": {},\r\n    \"totalpayble\": 0,\r\n    \"type\": \"03\",\r\n    \"tripassigntype\": 1,\r\n    \"getdriverconsent\": \"False\",\r\n    \"simtracktype\": \"N\",\r\n    \"enterprisename\": \"RCP\",\r\n    \"simtrackingstatus\": 2,\r\n    \"stopsduration\": {\r\n        \"day\": 0,\r\n        \"hours\": 0,\r\n        \"minutes\": 0\r\n    },\r\n    \"estimatedDistance\": 172,\r\n    \"isTripRecurring\": false,\r\n    \"tripRecurringType\": \"\",\r\n    \"additionaldrivers\": [],\r\n    \"expectedETA\": {\r\n        \"text\": \"3 hours 2 minutes \",\r\n        \"value\": 10961.663225806453\r\n    },\r\n    \"tripinfo\": {\r\n        \"shipmentNos\": [],\r\n        \"lorryrecieptNos\": [],\r\n        \"docs\": []\r\n    },\r\n    \"tripmodel\": \"Forward\",\r\n    \"destETA\": \"3 hours 2 minutes \",\r\n    \"destDist\": 171622,\r\n    \"pickupdate\": 1668778530000,\r\n    \"waypoints\": [],\r\n    \"direction_points\": [\r\n        {\r\n            \"lat\": 18.9894,\r\n            \"lng\": 73.11752\r\n        },\r\n        {\r\n            \"lat\": 18.989430000000002,\r\n            \"lng\": 73.11592\r\n        },\r\n        {\r\n            \"lat\": 18.99048,\r\n            \"lng\": 73.11558000000001\r\n        },\r\n        {\r\n            \"lat\": 18.99268,\r\n            \"lng\": 73.11527000000001\r\n        },\r\n        {\r\n            \"lat\": 18.9952,\r\n            \"lng\": 73.11382\r\n        },\r\n        {\r\n            \"lat\": 18.997680000000003,\r\n            \"lng\": 73.11074\r\n        },\r\n        {\r\n            \"lat\": 19.000110000000003,\r\n            \"lng\": 73.10744000000001\r\n        },\r\n        {\r\n            \"lat\": 19.00619,\r\n            \"lng\": 73.10759\r\n        },\r\n        {\r\n            \"lat\": 19.0137,\r\n            \"lng\": 73.10712000000001\r\n        },\r\n        {\r\n            \"lat\": 19.01781,\r\n            \"lng\": 73.10613000000001\r\n        },\r\n        {\r\n            \"lat\": 19.02102,\r\n            \"lng\": 73.10624\r\n        },\r\n        {\r\n            \"lat\": 19.03931,\r\n            \"lng\": 73.10448000000001\r\n        },\r\n        {\r\n            \"lat\": 19.0452,\r\n            \"lng\": 73.10342\r\n        },\r\n        {\r\n            \"lat\": 19.05026,\r\n            \"lng\": 73.10092\r\n        },\r\n        {\r\n            \"lat\": 19.06097,\r\n            \"lng\": 73.0961\r\n        },\r\n        {\r\n            \"lat\": 19.07226,\r\n            \"lng\": 73.08940000000001\r\n        },\r\n        {\r\n            \"lat\": 19.07993,\r\n            \"lng\": 73.08663\r\n        },\r\n        {\r\n            \"lat\": 19.086170000000003,\r\n            \"lng\": 73.08134000000001\r\n        },\r\n        {\r\n            \"lat\": 19.09569,\r\n            \"lng\": 73.07332000000001\r\n        },\r\n        {\r\n            \"lat\": 19.100830000000002,\r\n            \"lng\": 73.06947000000001\r\n        },\r\n        {\r\n            \"lat\": 19.110010000000003,\r\n            \"lng\": 73.06469000000001\r\n        },\r\n        {\r\n            \"lat\": 19.113590000000002,\r\n            \"lng\": 73.06077\r\n        },\r\n        {\r\n            \"lat\": 19.119010000000003,\r\n            \"lng\": 73.05692\r\n        },\r\n        {\r\n            \"lat\": 19.124180000000003,\r\n            \"lng\": 73.05517\r\n        },\r\n        {\r\n            \"lat\": 19.127380000000002,\r\n            \"lng\": 73.05502\r\n        },\r\n        {\r\n            \"lat\": 19.132990000000003,\r\n            \"lng\": 73.05224000000001\r\n        },\r\n        {\r\n            \"lat\": 19.13794,\r\n            \"lng\": 73.05019\r\n        },\r\n        {\r\n            \"lat\": 19.14299,\r\n            \"lng\": 73.04675\r\n        },\r\n        {\r\n            \"lat\": 19.144340000000003,\r\n            \"lng\": 73.04406\r\n        },\r\n        {\r\n            \"lat\": 19.14572,\r\n            \"lng\": 73.04195\r\n        },\r\n        {\r\n            \"lat\": 19.148690000000002,\r\n            \"lng\": 73.03890000000001\r\n        },\r\n        {\r\n            \"lat\": 19.15114,\r\n            \"lng\": 73.03551\r\n        },\r\n        {\r\n            \"lat\": 19.1533,\r\n            \"lng\": 73.03428000000001\r\n        },\r\n        {\r\n            \"lat\": 19.156100000000002,\r\n            \"lng\": 73.03214000000001\r\n        },\r\n        {\r\n            \"lat\": 19.15951,\r\n            \"lng\": 73.03015\r\n        },\r\n        {\r\n            \"lat\": 19.160600000000002,\r\n            \"lng\": 73.02761000000001\r\n        },\r\n        {\r\n            \"lat\": 19.16214,\r\n            \"lng\": 73.02297\r\n        },\r\n        {\r\n            \"lat\": 19.16345,\r\n            \"lng\": 73.02114\r\n        },\r\n        {\r\n            \"lat\": 19.16608,\r\n            \"lng\": 73.0211\r\n        },\r\n        {\r\n            \"lat\": 19.169600000000003,\r\n            \"lng\": 73.02217\r\n        },\r\n        {\r\n            \"lat\": 19.171190000000003,\r\n            \"lng\": 73.02168\r\n        },\r\n        {\r\n            \"lat\": 19.170830000000002,\r\n            \"lng\": 73.01933000000001\r\n        },\r\n        {\r\n            \"lat\": 19.17141,\r\n            \"lng\": 73.0181\r\n        },\r\n        {\r\n            \"lat\": 19.174300000000002,\r\n            \"lng\": 73.01704000000001\r\n        },\r\n        {\r\n            \"lat\": 19.180760000000003,\r\n            \"lng\": 73.01920000000001\r\n        },\r\n        {\r\n            \"lat\": 19.18381,\r\n            \"lng\": 73.01945\r\n        },\r\n        {\r\n            \"lat\": 19.18596,\r\n            \"lng\": 73.01914000000001\r\n        },\r\n        {\r\n            \"lat\": 19.19294,\r\n            \"lng\": 73.02082\r\n        },\r\n        {\r\n            \"lat\": 19.197670000000002,\r\n            \"lng\": 73.0228\r\n        },\r\n        {\r\n            \"lat\": 19.199520000000003,\r\n            \"lng\": 73.02293\r\n        },\r\n        {\r\n            \"lat\": 19.2043,\r\n            \"lng\": 73.01915000000001\r\n        },\r\n        {\r\n            \"lat\": 19.21076,\r\n            \"lng\": 73.01609\r\n        },\r\n        {\r\n            \"lat\": 19.21496,\r\n            \"lng\": 73.0112\r\n        },\r\n        {\r\n            \"lat\": 19.21622,\r\n            \"lng\": 73.00906\r\n        },\r\n        {\r\n            \"lat\": 19.213720000000002,\r\n            \"lng\": 73.00634000000001\r\n        },\r\n        {\r\n            \"lat\": 19.21293,\r\n            \"lng\": 73.00617000000001\r\n        },\r\n        {\r\n            \"lat\": 19.212380000000003,\r\n            \"lng\": 73.00699\r\n        },\r\n        {\r\n            \"lat\": 19.215390000000003,\r\n            \"lng\": 73.01035\r\n        },\r\n        {\r\n            \"lat\": 19.224020000000003,\r\n            \"lng\": 73.01915000000001\r\n        },\r\n        {\r\n            \"lat\": 19.236720000000002,\r\n            \"lng\": 73.03683000000001\r\n        },\r\n        {\r\n            \"lat\": 19.24867,\r\n            \"lng\": 73.05102000000001\r\n        },\r\n        {\r\n            \"lat\": 19.25513,\r\n            \"lng\": 73.06195000000001\r\n        },\r\n        {\r\n            \"lat\": 19.2662,\r\n            \"lng\": 73.07842000000001\r\n        },\r\n        {\r\n            \"lat\": 19.27558,\r\n            \"lng\": 73.09339\r\n        },\r\n        {\r\n            \"lat\": 19.2805,\r\n            \"lng\": 73.10121000000001\r\n        },\r\n        {\r\n            \"lat\": 19.284260000000003,\r\n            \"lng\": 73.10571\r\n        },\r\n        {\r\n            \"lat\": 19.2893,\r\n            \"lng\": 73.1085\r\n        },\r\n        {\r\n            \"lat\": 19.295440000000003,\r\n            \"lng\": 73.10909000000001\r\n        },\r\n        {\r\n            \"lat\": 19.311410000000002,\r\n            \"lng\": 73.10730000000001\r\n        },\r\n        {\r\n            \"lat\": 19.31493,\r\n            \"lng\": 73.10690000000001\r\n        },\r\n        {\r\n            \"lat\": 19.32543,\r\n            \"lng\": 73.10904000000001\r\n        },\r\n        {\r\n            \"lat\": 19.33407,\r\n            \"lng\": 73.11173000000001\r\n        },\r\n        {\r\n            \"lat\": 19.338710000000003,\r\n            \"lng\": 73.11408\r\n        },\r\n        {\r\n            \"lat\": 19.34212,\r\n            \"lng\": 73.11773000000001\r\n        },\r\n        {\r\n            \"lat\": 19.34392,\r\n            \"lng\": 73.12104000000001\r\n        },\r\n        {\r\n            \"lat\": 19.345010000000002,\r\n            \"lng\": 73.12872\r\n        },\r\n        {\r\n            \"lat\": 19.34516,\r\n            \"lng\": 73.13380000000001\r\n        },\r\n        {\r\n            \"lat\": 19.348650000000003,\r\n            \"lng\": 73.14227000000001\r\n        },\r\n        {\r\n            \"lat\": 19.35247,\r\n            \"lng\": 73.14911000000001\r\n        },\r\n        {\r\n            \"lat\": 19.35592,\r\n            \"lng\": 73.15572\r\n        },\r\n        {\r\n            \"lat\": 19.35704,\r\n            \"lng\": 73.15875000000001\r\n        },\r\n        {\r\n            \"lat\": 19.359270000000002,\r\n            \"lng\": 73.16264000000001\r\n        },\r\n        {\r\n            \"lat\": 19.36201,\r\n            \"lng\": 73.16663000000001\r\n        },\r\n        {\r\n            \"lat\": 19.363590000000002,\r\n            \"lng\": 73.17057000000001\r\n        },\r\n        {\r\n            \"lat\": 19.368560000000002,\r\n            \"lng\": 73.18418000000001\r\n        },\r\n        {\r\n            \"lat\": 19.372310000000002,\r\n            \"lng\": 73.19688000000001\r\n        },\r\n        {\r\n            \"lat\": 19.37369,\r\n            \"lng\": 73.20154000000001\r\n        },\r\n        {\r\n            \"lat\": 19.37561,\r\n            \"lng\": 73.20449\r\n        },\r\n        {\r\n            \"lat\": 19.380080000000003,\r\n            \"lng\": 73.21231\r\n        },\r\n        {\r\n            \"lat\": 19.38184,\r\n            \"lng\": 73.21675\r\n        },\r\n        {\r\n            \"lat\": 19.383550000000003,\r\n            \"lng\": 73.21954000000001\r\n        },\r\n        {\r\n            \"lat\": 19.38699,\r\n            \"lng\": 73.22622000000001\r\n        },\r\n        {\r\n            \"lat\": 19.393140000000002,\r\n            \"lng\": 73.23363\r\n        },\r\n        {\r\n            \"lat\": 19.40192,\r\n            \"lng\": 73.24794\r\n        },\r\n        {\r\n            \"lat\": 19.40916,\r\n            \"lng\": 73.25773000000001\r\n        },\r\n        {\r\n            \"lat\": 19.413030000000003,\r\n            \"lng\": 73.26428\r\n        },\r\n        {\r\n            \"lat\": 19.41432,\r\n            \"lng\": 73.27085000000001\r\n        },\r\n        {\r\n            \"lat\": 19.415180000000003,\r\n            \"lng\": 73.27541000000001\r\n        },\r\n        {\r\n            \"lat\": 19.416430000000002,\r\n            \"lng\": 73.27693000000001\r\n        },\r\n        {\r\n            \"lat\": 19.422150000000002,\r\n            \"lng\": 73.28204000000001\r\n        },\r\n        {\r\n            \"lat\": 19.42509,\r\n            \"lng\": 73.28739\r\n        },\r\n        {\r\n            \"lat\": 19.427100000000003,\r\n            \"lng\": 73.28946\r\n        },\r\n        {\r\n            \"lat\": 19.428700000000003,\r\n            \"lng\": 73.29139\r\n        },\r\n        {\r\n            \"lat\": 19.432350000000003,\r\n            \"lng\": 73.29334\r\n        },\r\n        {\r\n            \"lat\": 19.4371,\r\n            \"lng\": 73.29766000000001\r\n        },\r\n        {\r\n            \"lat\": 19.443170000000002,\r\n            \"lng\": 73.30367000000001\r\n        },\r\n        {\r\n            \"lat\": 19.445050000000002,\r\n            \"lng\": 73.30815000000001\r\n        },\r\n        {\r\n            \"lat\": 19.445320000000002,\r\n            \"lng\": 73.31536000000001\r\n        },\r\n        {\r\n            \"lat\": 19.44529,\r\n            \"lng\": 73.32269000000001\r\n        },\r\n        {\r\n            \"lat\": 19.446260000000002,\r\n            \"lng\": 73.32713000000001\r\n        },\r\n        {\r\n            \"lat\": 19.449260000000002,\r\n            \"lng\": 73.33104\r\n        },\r\n        {\r\n            \"lat\": 19.45289,\r\n            \"lng\": 73.33276000000001\r\n        },\r\n        {\r\n            \"lat\": 19.46149,\r\n            \"lng\": 73.33436\r\n        },\r\n        {\r\n            \"lat\": 19.467470000000002,\r\n            \"lng\": 73.33462\r\n        },\r\n        {\r\n            \"lat\": 19.47194,\r\n            \"lng\": 73.334\r\n        },\r\n        {\r\n            \"lat\": 19.477410000000003,\r\n            \"lng\": 73.33193\r\n        },\r\n        {\r\n            \"lat\": 19.48178,\r\n            \"lng\": 73.33204\r\n        },\r\n        {\r\n            \"lat\": 19.487280000000002,\r\n            \"lng\": 73.33092\r\n        },\r\n        {\r\n            \"lat\": 19.490000000000002,\r\n            \"lng\": 73.33253\r\n        },\r\n        {\r\n            \"lat\": 19.493740000000003,\r\n            \"lng\": 73.33394000000001\r\n        },\r\n        {\r\n            \"lat\": 19.498450000000002,\r\n            \"lng\": 73.33281000000001\r\n        },\r\n        {\r\n            \"lat\": 19.504830000000002,\r\n            \"lng\": 73.3292\r\n        },\r\n        {\r\n            \"lat\": 19.50843,\r\n            \"lng\": 73.32832\r\n        },\r\n        {\r\n            \"lat\": 19.51161,\r\n            \"lng\": 73.32916\r\n        },\r\n        {\r\n            \"lat\": 19.514310000000002,\r\n            \"lng\": 73.33101\r\n        },\r\n        {\r\n            \"lat\": 19.519150000000003,\r\n            \"lng\": 73.33659\r\n        },\r\n        {\r\n            \"lat\": 19.52242,\r\n            \"lng\": 73.33871\r\n        },\r\n        {\r\n            \"lat\": 19.529400000000003,\r\n            \"lng\": 73.34032\r\n        },\r\n        {\r\n            \"lat\": 19.537920000000003,\r\n            \"lng\": 73.34693\r\n        },\r\n        {\r\n            \"lat\": 19.54134,\r\n            \"lng\": 73.34914\r\n        },\r\n        {\r\n            \"lat\": 19.543000000000003,\r\n            \"lng\": 73.35026\r\n        },\r\n        {\r\n            \"lat\": 19.543670000000002,\r\n            \"lng\": 73.35162000000001\r\n        },\r\n        {\r\n            \"lat\": 19.54439,\r\n            \"lng\": 73.35561000000001\r\n        },\r\n        {\r\n            \"lat\": 19.547790000000003,\r\n            \"lng\": 73.36178000000001\r\n        },\r\n        {\r\n            \"lat\": 19.55037,\r\n            \"lng\": 73.36519000000001\r\n        },\r\n        {\r\n            \"lat\": 19.558010000000003,\r\n            \"lng\": 73.37334000000001\r\n        },\r\n        {\r\n            \"lat\": 19.561690000000002,\r\n            \"lng\": 73.375\r\n        },\r\n        {\r\n            \"lat\": 19.565330000000003,\r\n            \"lng\": 73.37547\r\n        },\r\n        {\r\n            \"lat\": 19.57082,\r\n            \"lng\": 73.37445000000001\r\n        },\r\n        {\r\n            \"lat\": 19.57421,\r\n            \"lng\": 73.37669000000001\r\n        },\r\n        {\r\n            \"lat\": 19.57583,\r\n            \"lng\": 73.38024\r\n        },\r\n        {\r\n            \"lat\": 19.577160000000003,\r\n            \"lng\": 73.38202000000001\r\n        },\r\n        {\r\n            \"lat\": 19.580260000000003,\r\n            \"lng\": 73.38315\r\n        },\r\n        {\r\n            \"lat\": 19.58415,\r\n            \"lng\": 73.38637\r\n        },\r\n        {\r\n            \"lat\": 19.587590000000002,\r\n            \"lng\": 73.39009\r\n        },\r\n        {\r\n            \"lat\": 19.59268,\r\n            \"lng\": 73.39222000000001\r\n        },\r\n        {\r\n            \"lat\": 19.596400000000003,\r\n            \"lng\": 73.39176\r\n        },\r\n        {\r\n            \"lat\": 19.59981,\r\n            \"lng\": 73.39407\r\n        },\r\n        {\r\n            \"lat\": 19.6036,\r\n            \"lng\": 73.39725\r\n        },\r\n        {\r\n            \"lat\": 19.608150000000002,\r\n            \"lng\": 73.39827000000001\r\n        },\r\n        {\r\n            \"lat\": 19.610100000000003,\r\n            \"lng\": 73.40073000000001\r\n        },\r\n        {\r\n            \"lat\": 19.609810000000003,\r\n            \"lng\": 73.4041\r\n        },\r\n        {\r\n            \"lat\": 19.61061,\r\n            \"lng\": 73.40674\r\n        },\r\n        {\r\n            \"lat\": 19.61316,\r\n            \"lng\": 73.40872\r\n        },\r\n        {\r\n            \"lat\": 19.619510000000002,\r\n            \"lng\": 73.41774000000001\r\n        },\r\n        {\r\n            \"lat\": 19.62179,\r\n            \"lng\": 73.41959\r\n        },\r\n        {\r\n            \"lat\": 19.62871,\r\n            \"lng\": 73.42082\r\n        },\r\n        {\r\n            \"lat\": 19.631,\r\n            \"lng\": 73.42273\r\n        },\r\n        {\r\n            \"lat\": 19.631690000000003,\r\n            \"lng\": 73.42533\r\n        },\r\n        {\r\n            \"lat\": 19.63007,\r\n            \"lng\": 73.43303\r\n        },\r\n        {\r\n            \"lat\": 19.629060000000003,\r\n            \"lng\": 73.43533000000001\r\n        },\r\n        {\r\n            \"lat\": 19.62714,\r\n            \"lng\": 73.43854\r\n        },\r\n        {\r\n            \"lat\": 19.62714,\r\n            \"lng\": 73.44072000000001\r\n        },\r\n        {\r\n            \"lat\": 19.62864,\r\n            \"lng\": 73.44365\r\n        },\r\n        {\r\n            \"lat\": 19.62819,\r\n            \"lng\": 73.44917000000001\r\n        },\r\n        {\r\n            \"lat\": 19.6279,\r\n            \"lng\": 73.45509000000001\r\n        },\r\n        {\r\n            \"lat\": 19.626070000000002,\r\n            \"lng\": 73.46257\r\n        },\r\n        {\r\n            \"lat\": 19.62655,\r\n            \"lng\": 73.4649\r\n        },\r\n        {\r\n            \"lat\": 19.63043,\r\n            \"lng\": 73.47156000000001\r\n        },\r\n        {\r\n            \"lat\": 19.635620000000003,\r\n            \"lng\": 73.47995\r\n        },\r\n        {\r\n            \"lat\": 19.638160000000003,\r\n            \"lng\": 73.48319000000001\r\n        },\r\n        {\r\n            \"lat\": 19.640700000000002,\r\n            \"lng\": 73.48332\r\n        },\r\n        {\r\n            \"lat\": 19.64441,\r\n            \"lng\": 73.48230000000001\r\n        },\r\n        {\r\n            \"lat\": 19.64542,\r\n            \"lng\": 73.48391000000001\r\n        },\r\n        {\r\n            \"lat\": 19.647560000000002,\r\n            \"lng\": 73.48464000000001\r\n        },\r\n        {\r\n            \"lat\": 19.649,\r\n            \"lng\": 73.48684\r\n        },\r\n        {\r\n            \"lat\": 19.651680000000002,\r\n            \"lng\": 73.48880000000001\r\n        },\r\n        {\r\n            \"lat\": 19.652150000000002,\r\n            \"lng\": 73.49176\r\n        },\r\n        {\r\n            \"lat\": 19.651600000000002,\r\n            \"lng\": 73.49657\r\n        },\r\n        {\r\n            \"lat\": 19.652990000000003,\r\n            \"lng\": 73.49772\r\n        },\r\n        {\r\n            \"lat\": 19.65681,\r\n            \"lng\": 73.49768\r\n        },\r\n        {\r\n            \"lat\": 19.665860000000002,\r\n            \"lng\": 73.50062000000001\r\n        },\r\n        {\r\n            \"lat\": 19.67122,\r\n            \"lng\": 73.50061000000001\r\n        },\r\n        {\r\n            \"lat\": 19.675320000000003,\r\n            \"lng\": 73.50114\r\n        },\r\n        {\r\n            \"lat\": 19.678790000000003,\r\n            \"lng\": 73.50276000000001\r\n        },\r\n        {\r\n            \"lat\": 19.679070000000003,\r\n            \"lng\": 73.50199\r\n        },\r\n        {\r\n            \"lat\": 19.678050000000002,\r\n            \"lng\": 73.50077\r\n        },\r\n        {\r\n            \"lat\": 19.68117,\r\n            \"lng\": 73.49931000000001\r\n        },\r\n        {\r\n            \"lat\": 19.684790000000003,\r\n            \"lng\": 73.49873000000001\r\n        },\r\n        {\r\n            \"lat\": 19.687240000000003,\r\n            \"lng\": 73.49829000000001\r\n        },\r\n        {\r\n            \"lat\": 19.68814,\r\n            \"lng\": 73.49763\r\n        },\r\n        {\r\n            \"lat\": 19.689770000000003,\r\n            \"lng\": 73.49610000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69461,\r\n            \"lng\": 73.49728\r\n        },\r\n        {\r\n            \"lat\": 19.695500000000003,\r\n            \"lng\": 73.49654000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69656,\r\n            \"lng\": 73.49765000000001\r\n        },\r\n        {\r\n            \"lat\": 19.698020000000003,\r\n            \"lng\": 73.49743000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69808,\r\n            \"lng\": 73.49937\r\n        },\r\n        {\r\n            \"lat\": 19.69845,\r\n            \"lng\": 73.50004000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69961,\r\n            \"lng\": 73.49992\r\n        },\r\n        {\r\n            \"lat\": 19.70163,\r\n            \"lng\": 73.5004\r\n        },\r\n        {\r\n            \"lat\": 19.702260000000003,\r\n            \"lng\": 73.50101000000001\r\n        },\r\n        {\r\n            \"lat\": 19.70118,\r\n            \"lng\": 73.50176\r\n        },\r\n        {\r\n            \"lat\": 19.700930000000003,\r\n            \"lng\": 73.50252\r\n        },\r\n        {\r\n            \"lat\": 19.70007,\r\n            \"lng\": 73.50332\r\n        },\r\n        {\r\n            \"lat\": 19.698320000000002,\r\n            \"lng\": 73.50491000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69731,\r\n            \"lng\": 73.50669\r\n        },\r\n        {\r\n            \"lat\": 19.699990000000003,\r\n            \"lng\": 73.50710000000001\r\n        },\r\n        {\r\n            \"lat\": 19.70125,\r\n            \"lng\": 73.50766\r\n        },\r\n        {\r\n            \"lat\": 19.70043,\r\n            \"lng\": 73.50991\r\n        },\r\n        {\r\n            \"lat\": 19.698770000000003,\r\n            \"lng\": 73.51176000000001\r\n        },\r\n        {\r\n            \"lat\": 19.698960000000003,\r\n            \"lng\": 73.51298000000001\r\n        },\r\n        {\r\n            \"lat\": 19.696830000000002,\r\n            \"lng\": 73.52114\r\n        },\r\n        {\r\n            \"lat\": 19.69621,\r\n            \"lng\": 73.52349000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69679,\r\n            \"lng\": 73.52643\r\n        },\r\n        {\r\n            \"lat\": 19.69763,\r\n            \"lng\": 73.53003000000001\r\n        },\r\n        {\r\n            \"lat\": 19.69601,\r\n            \"lng\": 73.53496000000001\r\n        },\r\n        {\r\n            \"lat\": 19.691660000000002,\r\n            \"lng\": 73.54757000000001\r\n        },\r\n        {\r\n            \"lat\": 19.688670000000002,\r\n            \"lng\": 73.55814000000001\r\n        },\r\n        {\r\n            \"lat\": 19.68653,\r\n            \"lng\": 73.56618\r\n        },\r\n        {\r\n            \"lat\": 19.686040000000002,\r\n            \"lng\": 73.57385000000001\r\n        },\r\n        {\r\n            \"lat\": 19.68759,\r\n            \"lng\": 73.58395\r\n        },\r\n        {\r\n            \"lat\": 19.688670000000002,\r\n            \"lng\": 73.58611\r\n        },\r\n        {\r\n            \"lat\": 19.69056,\r\n            \"lng\": 73.58779000000001\r\n        },\r\n        {\r\n            \"lat\": 19.693630000000002,\r\n            \"lng\": 73.58968\r\n        },\r\n        {\r\n            \"lat\": 19.69538,\r\n            \"lng\": 73.59258000000001\r\n        },\r\n        {\r\n            \"lat\": 19.696820000000002,\r\n            \"lng\": 73.59681\r\n        },\r\n        {\r\n            \"lat\": 19.70129,\r\n            \"lng\": 73.60597\r\n        },\r\n        {\r\n            \"lat\": 19.704880000000003,\r\n            \"lng\": 73.60916\r\n        },\r\n        {\r\n            \"lat\": 19.70701,\r\n            \"lng\": 73.61217\r\n        },\r\n        {\r\n            \"lat\": 19.71049,\r\n            \"lng\": 73.61678\r\n        },\r\n        {\r\n            \"lat\": 19.71769,\r\n            \"lng\": 73.62419000000001\r\n        },\r\n        {\r\n            \"lat\": 19.723920000000003,\r\n            \"lng\": 73.63002\r\n        },\r\n        {\r\n            \"lat\": 19.73177,\r\n            \"lng\": 73.63426000000001\r\n        },\r\n        {\r\n            \"lat\": 19.73542,\r\n            \"lng\": 73.63506000000001\r\n        },\r\n        {\r\n            \"lat\": 19.739050000000002,\r\n            \"lng\": 73.63754\r\n        },\r\n        {\r\n            \"lat\": 19.7405,\r\n            \"lng\": 73.63987\r\n        },\r\n        {\r\n            \"lat\": 19.742060000000002,\r\n            \"lng\": 73.64045\r\n        },\r\n        {\r\n            \"lat\": 19.746070000000003,\r\n            \"lng\": 73.6406\r\n        },\r\n        {\r\n            \"lat\": 19.74754,\r\n            \"lng\": 73.64248\r\n        },\r\n        {\r\n            \"lat\": 19.75146,\r\n            \"lng\": 73.64359\r\n        },\r\n        {\r\n            \"lat\": 19.755270000000003,\r\n            \"lng\": 73.64671000000001\r\n        },\r\n        {\r\n            \"lat\": 19.76182,\r\n            \"lng\": 73.65249\r\n        },\r\n        {\r\n            \"lat\": 19.76942,\r\n            \"lng\": 73.65821000000001\r\n        },\r\n        {\r\n            \"lat\": 19.777410000000003,\r\n            \"lng\": 73.66344000000001\r\n        },\r\n        {\r\n            \"lat\": 19.784640000000003,\r\n            \"lng\": 73.66678\r\n        },\r\n        {\r\n            \"lat\": 19.7935,\r\n            \"lng\": 73.67104\r\n        },\r\n        {\r\n            \"lat\": 19.796930000000003,\r\n            \"lng\": 73.67168000000001\r\n        },\r\n        {\r\n            \"lat\": 19.800880000000003,\r\n            \"lng\": 73.67118\r\n        },\r\n        {\r\n            \"lat\": 19.812820000000002,\r\n            \"lng\": 73.66973\r\n        },\r\n        {\r\n            \"lat\": 19.81727,\r\n            \"lng\": 73.66906\r\n        },\r\n        {\r\n            \"lat\": 19.82091,\r\n            \"lng\": 73.67067\r\n        },\r\n        {\r\n            \"lat\": 19.824930000000002,\r\n            \"lng\": 73.67337\r\n        },\r\n        {\r\n            \"lat\": 19.83132,\r\n            \"lng\": 73.67549000000001\r\n        },\r\n        {\r\n            \"lat\": 19.839250000000003,\r\n            \"lng\": 73.67707\r\n        },\r\n        {\r\n            \"lat\": 19.843230000000002,\r\n            \"lng\": 73.68052\r\n        },\r\n        {\r\n            \"lat\": 19.84544,\r\n            \"lng\": 73.68152\r\n        },\r\n        {\r\n            \"lat\": 19.84756,\r\n            \"lng\": 73.68162000000001\r\n        },\r\n        {\r\n            \"lat\": 19.85168,\r\n            \"lng\": 73.67963\r\n        },\r\n        {\r\n            \"lat\": 19.85426,\r\n            \"lng\": 73.68017\r\n        },\r\n        {\r\n            \"lat\": 19.8621,\r\n            \"lng\": 73.68437\r\n        },\r\n        {\r\n            \"lat\": 19.867610000000003,\r\n            \"lng\": 73.68794000000001\r\n        },\r\n        {\r\n            \"lat\": 19.87761,\r\n            \"lng\": 73.69137\r\n        },\r\n        {\r\n            \"lat\": 19.891070000000003,\r\n            \"lng\": 73.69525\r\n        },\r\n        {\r\n            \"lat\": 19.90426,\r\n            \"lng\": 73.7001\r\n        },\r\n        {\r\n            \"lat\": 19.91083,\r\n            \"lng\": 73.70534\r\n        },\r\n        {\r\n            \"lat\": 19.916500000000003,\r\n            \"lng\": 73.71144000000001\r\n        },\r\n        {\r\n            \"lat\": 19.922510000000003,\r\n            \"lng\": 73.71518\r\n        },\r\n        {\r\n            \"lat\": 19.92679,\r\n            \"lng\": 73.71781\r\n        },\r\n        {\r\n            \"lat\": 19.929810000000003,\r\n            \"lng\": 73.72143000000001\r\n        },\r\n        {\r\n            \"lat\": 19.932090000000002,\r\n            \"lng\": 73.72463\r\n        },\r\n        {\r\n            \"lat\": 19.932930000000002,\r\n            \"lng\": 73.72711000000001\r\n        },\r\n        {\r\n            \"lat\": 19.93553,\r\n            \"lng\": 73.73271000000001\r\n        },\r\n        {\r\n            \"lat\": 19.93634,\r\n            \"lng\": 73.73507000000001\r\n        },\r\n        {\r\n            \"lat\": 19.93891,\r\n            \"lng\": 73.73826000000001\r\n        },\r\n        {\r\n            \"lat\": 19.94377,\r\n            \"lng\": 73.74408000000001\r\n        },\r\n        {\r\n            \"lat\": 19.951510000000003,\r\n            \"lng\": 73.75280000000001\r\n        },\r\n        {\r\n            \"lat\": 19.95917,\r\n            \"lng\": 73.76107\r\n        },\r\n        {\r\n            \"lat\": 19.96592,\r\n            \"lng\": 73.76751\r\n        },\r\n        {\r\n            \"lat\": 19.96936,\r\n            \"lng\": 73.77019\r\n        },\r\n        {\r\n            \"lat\": 19.97484,\r\n            \"lng\": 73.77573000000001\r\n        },\r\n        {\r\n            \"lat\": 19.980050000000002,\r\n            \"lng\": 73.78009\r\n        },\r\n        {\r\n            \"lat\": 19.9848,\r\n            \"lng\": 73.78315\r\n        },\r\n        {\r\n            \"lat\": 19.9873,\r\n            \"lng\": 73.78398\r\n        },\r\n        {\r\n            \"lat\": 19.99023,\r\n            \"lng\": 73.78694\r\n        },\r\n        {\r\n            \"lat\": 19.99151,\r\n            \"lng\": 73.78887\r\n        },\r\n        {\r\n            \"lat\": 19.99409,\r\n            \"lng\": 73.79038\r\n        },\r\n        {\r\n            \"lat\": 19.994380000000003,\r\n            \"lng\": 73.79008\r\n        },\r\n        {\r\n            \"lat\": 19.99689,\r\n            \"lng\": 73.79052\r\n        },\r\n        {\r\n            \"lat\": 19.997490000000003,\r\n            \"lng\": 73.79001000000001\r\n        },\r\n        {\r\n            \"lat\": 19.99745,\r\n            \"lng\": 73.7898\r\n        }\r\n    ],\r\n    \"gstins\": [],\r\n    \"manualEwaybills\": [],\r\n    \"loginUserId\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"clientId\": \"11\",\r\n    \"size\": \"100\",\r\n    \"pageNo\": \"1\",\r\n    \"searchText\": \"\",\r\n    \"contyp\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/booking/v6/update-cargo-trip",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"booking",
+								"v6",
+								"update-cargo-trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updatetripstatus/V3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userid\":\"460b71b6-308a-11eb-978c-005056af269b\",\"bookingid\":\"{{BOOKINGID}}\",\"bookingsts\":\"58\",\"tripassigntype\":\"1\",\"cancelby\":\"Customer\",\"driverIMEI\":\"\"}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/booking/v3/cargo_trip_status_update",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"booking",
+								"v3",
+								"cargo_trip_status_update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var fLEET = Bodydata.fleetID\r",
+									"console.log(fLEET)\r",
+									"pm.collectionVariables.set(\"Fleetid\",Bodydata.fleetID)\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": \"11\",\r\n    \"loginId\": \"{{userid}}\",\r\n    \"IMEIId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Tracker/v1/Details",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Tracker",
+								"v1",
+								"Details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IMEIId\": \"1273000000000672\",\r\n    \"loginId\": \"{{userid}}\",\r\n    \"pdid\": \"{{PDID}}\",\r\n    \"fleetID\": \"{{Fleetid}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Tracker/v2/vehicleRemove",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Tracker",
+								"v2",
+								"vehicleRemove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Device delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IMEI\": \"{{IMEI}}\",\r\n    \"loginId\": \"ranjit@assettl.com\",\r\n    \"clientId\": \"11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Tracker/v1/deleteOnboardDevice",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Tracker",
+								"v1",
+								"deleteOnboardDevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteDriver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDYzNjY1NDQsImV4cCI6MTY0NjM5NTM0NH0.P__JJ8YQTmX2M3ncz4KDdUDSuhK4LTxyTSkpGa_HyLs",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"{{driver}}\",\r\n    \"userid\": \"{{userid}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/Fleetmaster/driver/deleteDriver",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"Fleetmaster",
+								"driver",
+								"deleteDriver"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "create-Location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var lOC = Bodydata.details._id\r",
+									"console.log(lOC)\r",
+									"pm.collectionVariables.set(\"Location\",Bodydata.details._id)\r",
+									"var UPDATED = Bodydata.details.updatedby\r",
+									"console.log(UPDATED)\r",
+									"pm.collectionVariables.set(\"UPDATED\",Bodydata.details.updatedby)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserId",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"\",\r\n    \"name\": \"goa india\",\r\n    \"lat\": \"15.38035\",\r\n    \"lng\": \"73.83500\",\r\n    \"description\": \"\",\r\n    \"userid\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"location\": \"Goa International Airport (GOI), Airport Rd, Dabolim, Goa 403801, India\",\r\n    \"stoptype\": \"5f44bbe39fc9190d06458b45\",\r\n    \"stoptypedesc\": \"Stop\",\r\n    \"clientid\": \"11\",\r\n    \"isAddToRoute\": true,\r\n    \"isUnauthorized\": false,\r\n    \"isDetention\": true,\r\n    \"isGeofence\": true,\r\n    \"geofence\": {\r\n        \"lat\": \"15.38035\",\r\n        \"long\": \"73.83500\",\r\n        \"radius\": 500\r\n    },\r\n    \"erpcode\": \"654646\",\r\n    \"email\": \"\",\r\n    \"phoneNo\": \"\",\r\n    \"speedlimit\": \"\",\r\n    \"users\": \"\",\r\n    \"area\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/master/v3/create-stop",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"master",
+								"v3",
+								"create-stop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-location",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminid\":\"ranjit@assettl.com\",\r\n    \"id\": \"{{Location}}\",\r\n    \"name\": \"Navimumbai\",\r\n    \"description\": \"\",\r\n    \"lat\": \"19.098208\",\r\n    \"lng\": \"73.065101\",\r\n    \"location\": \"33X8+82 Navi Mumbai, Maharashtra, India\",\r\n    \"updatedby\": \"{{UPDATED}}\",\r\n    \"createdby\": \"{{UPDATED}}\",\r\n    \"stoptype\": \"Stop\",\r\n    \"stoptypedesc\": \"Dhaba\",\r\n    \"userid\": \"{{userid}}\",\r\n    \"clientid\": \"11\",\r\n    \"isUnauthorized\": false,\r\n    \"isDetention\": false,\r\n    \"isGeofence\": false,\r\n    \"erpcode\": \"kfjdk909ghhh\",\r\n    \"email\": \"\",\r\n    \"phoneNo\": \"\",\r\n    \"speed\": \"\",\r\n    \"users\":\"\",\r\n    \"area\": \"\",\r\n    \"geofence\": {\r\n        \"lat\": \"19.09828\",\r\n        \"long\": \"73.06511\",\r\n        \"radius\": 500\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/master/v4/update-location",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"master",
+								"v4",
+								"update-location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLocation-Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": \"{{userid}}\",\r\n    \"clientid\": \"11\",\r\n    \"size\": \"40\",\r\n    \"pageNo\": 1,\r\n    \"searchText\": \"\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/master/v1/get-location-details",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"master",
+								"v1",
+								"get-location-details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-location",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"_id\": \"{{Location}}\",\r\n    \"userid\": \"{{userid}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/master/v2/delete-stop",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"master",
+								"v2",
+								"delete-stop"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "createOrgDetails",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var Org = Bodydata.OrgnizationID\r",
+									"console.log(Org)\r",
+									"pm.collectionVariables.set(\"ORGID\",Bodydata.OrgnizationID)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orgname\": \"org100\",\r\n    \"orgmno\": \"9756875930\",\r\n    \"savemode\": \"create\",\r\n    \"ORG_ID\": null,\r\n    \"C_ID\": \"11\",\r\n    \"userID\": \"460b71b6-308a-11eb-978c-005056af269b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/singUp/v1/createOrgDetails",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"singUp",
+								"v1",
+								"createOrgDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOrgCustLocation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Bodydata = JSON.parse(responseBody)\r",
+									"var Org = Bodydata.CustomerId\r",
+									"console.log(Org)\r",
+									"pm.collectionVariables.set(\"Cusid\",Bodydata.CustomerId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"ORG_ID\": \"{{ORGID}}\",\r\n    \"userId\": \"460b71b6-308a-11eb-978c-005056af269b\",\r\n    \"CUST_ID\": null,\r\n    \"custname\": \"hama\",\r\n    \"custmno\": \"6856856500\",\r\n    \"custemail\": \"\",\r\n    \"Lattitude\": \"10.16315\",\r\n    \"Longitude\": \"76.64127\",\r\n    \"addr\": \"5J7R+7G6, Ayyampuzha, Kerala 686681, India\",\r\n    \"State\": \"Kerala\",\r\n    \"locname\": \"KERALA\",\r\n    \"geotrip\": false,\r\n    \"savemode\": \"create\",\r\n    \"C_ID\": \"11\",\r\n    \"erpcode\": null,\r\n    \"area\": null,\r\n    \"speedres\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/singUp/v2/createOrgCustLocation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"singUp",
+								"v2",
+								"createOrgCustLocation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrgCustLocation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"orgname\": \"ORG28\",\r\n    \"orgmno\": \"9756875902\",\r\n    \"savemode\": \"modify\",\r\n    \"ORG_ID\": \"{{OrgnizationID}}\",\r\n    \"C_ID\": \"11\",\r\n    \"userID\": \"460b71b6-308a-11eb-978c-005056af269b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/singUp/v1/createOrgDetails",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"singUp",
+								"v1",
+								"createOrgDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrganizationList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"C_ID\": \"11\",\r\n    \"size\": \"50\",\r\n    \"pageNo\": 1,\r\n    \"userId\":\"460b71b6-308a-11eb-978c-005056af269b\"\r\n} \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/singUp/v1/getOrganizationList",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"singUp",
+								"v1",
+								"getOrganizationList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrgCustList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"ORG_ID\": \"{{ORGID}}\",\r\n    \"C_ID\": \"11\",\r\n    \"size\": \"50\",\r\n    \"pageNo\": 1,\r\n    \"userId\": \"460b71b6-308a-11eb-978c-005056af269b\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/singUp/v1/getOrgCustList",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"singUp",
+								"v1",
+								"getOrgCustList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrgCustLocation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "tokenuserid",
+								"value": "{{Userid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminid\": \"ranjit@assettl.com\",\r\n    \"ORG_ID\": \"{{ORGID}}\",\r\n    \"CUST_ID\": \"28e2689b-74b6-11ed-a652-000c29a442fb\",\r\n    \"userId\": \"{{userid}}\",\r\n    \"C_ID\": \"11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jhswebapi/api/customer/singUp/v2/deleteOrgCustLocation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jhswebapi",
+								"api",
+								"customer",
+								"singUp",
+								"v2",
+								"deleteOrgCustLocation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "http://10.159.61.236:8080/jhswebapi/API/login/v5/loginWithOTP",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"email_mno\": \"utkarsh1.dixit@ril.com\",\r\n\r\n    \"pwd_passcode\": \"Rjil@12345\",\r\n\r\n    \"is_mobile\": false\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.159.61.236:8080/jhswebapi/API/login/v5/loginWithOTP",
+					"protocol": "http",
+					"host": [
+						"10",
+						"159",
+						"61",
+						"236"
+					],
+					"port": "8080",
+					"path": [
+						"jhswebapi",
+						"API",
+						"login",
+						"v5",
+						"loginWithOTP"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://183.82.2.55:8080"
+		},
+		{
+			"key": "auth",
+			"value": ""
+		},
+		{
+			"key": "userid",
+			"value": ""
+		},
+		{
+			"key": "driver",
+			"value": ""
+		},
+		{
+			"key": "dname",
+			"value": ""
+		},
+		{
+			"key": "dmno",
+			"value": ""
+		},
+		{
+			"key": "tagName1",
+			"value": ""
+		},
+		{
+			"key": "VehicleReg",
+			"value": ""
+		},
+		{
+			"key": "Fleetid",
+			"value": ""
+		},
+		{
+			"key": "tagName2",
+			"value": ""
+		},
+		{
+			"key": "VehicleReg1",
+			"value": ""
+		},
+		{
+			"key": "dmno1",
+			"value": ""
+		},
+		{
+			"key": "Token1",
+			"value": ""
+		},
+		{
+			"key": "userid1",
+			"value": ""
+		},
+		{
+			"key": "TOKEN",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "Token2",
+			"value": ""
+		},
+		{
+			"key": "Token3",
+			"value": ""
+		},
+		{
+			"key": "Userid1",
+			"value": ""
+		},
+		{
+			"key": "BOOKINGID",
+			"value": ""
+		},
+		{
+			"key": "IMEI1",
+			"value": ""
+		},
+		{
+			"key": "PDID",
+			"value": ""
+		},
+		{
+			"key": "DriverIMEI",
+			"value": ""
+		},
+		{
+			"key": "Location",
+			"value": ""
+		},
+		{
+			"key": "UPDATED",
+			"value": ""
+		},
+		{
+			"key": "ORGID",
+			"value": ""
+		},
+		{
+			"key": "Cusid",
+			"value": ""
+		},
+		{
+			"key": "Userid",
+			"value": ""
+		}
+	]
+}
